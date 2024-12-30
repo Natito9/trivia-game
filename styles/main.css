@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Jersey+20&family=Luckiest+Guy&family=Rubik+Scribble&family=Work+Sans:wght@600&display=swap');
+
+:root {
+    --primary-color: #FF812F;
+    --text-primary-color: #343a40;
+    --text-secondary-color: #fcfcfc;
+    --correct-color: #71CD63;
+    --incorrect-color: #dc3545;
+
+    --main-font: "Luckiest Guy", Monserrat, sans-serif;
+}
+
+body {
+    font-family: var(--main-font);
+  
+}

@@ -1,0 +1,9 @@
+@import url('main.css');
+
+nav {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 4rem;
+    background-color: var(--primary-color);
+}
