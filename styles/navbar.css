@@ -4,6 +4,36 @@ nav {
     display:flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: end;
     padding: 2rem 4rem;
     background-color: var(--primary-color);
+    
+}
+
+h1{
+    font-size: 2rem;
+}
+
+#quit-game{
+    background-image: url('../sources/images/icon-x-close.png'); 
+    background-size: cover;
+    background-color: var(--primary-color);
+    border:none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50px;
+  padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+
+}
+
+#quit-game:hover{
+    transform: scale(1.1);
+    background-color: var(--text-secondary-color);
+}
+
+#current-question{
+    font-size: 2rem;
 }
