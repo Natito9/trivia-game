@@ -1,0 +1,47 @@
+.popUp-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.74);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    width: 80%;
+    height: 60%;
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.popUp-text {
+    color: var(--text-secondary-color);
+}
+/* 
+i can try to habe all the styling for all butotns the same :) later */
+.next-question-button{
+    height:fit-content;
+    width:70%;
+    padding:1rem;
+    font-size: 1rem;;
+    font-family: var(--main-font);
+    background-color: var(--primary-color);
+    border: solid rgb(118, 55, 2) 0px;
+    box-shadow: rgb(118, 55, 2) 1px 0px 0px, rgb(118, 55, 2)  2px 2px 0px 0px, rgb(118, 55, 2) 3px 3px 0px 0px, rgb(118, 55, 2) 4px 4px 0px 0px, rgb(118, 55, 2) 5px 5px 0px 0px;
+    box-sizing: border-box;
+    color: #41403e;
+    cursor: pointer;
+    display: inline-block;
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+
+.next-question-button:hover {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+    transform: translate3d(0, 2px, 0);
+    background-color: var(--primary-color-hover);
+}
