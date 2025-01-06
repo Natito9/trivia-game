@@ -1,7 +1,7 @@
 //visual aspects
 
 //game start display
-//trivia display in main
+// DONE trivia display in main
 //correct and incorrent display
 //game ends display
 
@@ -22,18 +22,16 @@
 
 //need
 
-//api call
+//DONE api call
 //handle 404 error with pop up
 //fetch different categories changing the api url
+
 const body = document.querySelector("body");
 
 const apiUrl = `https://opentdb.com/api.php?amount=10&category=${9}&type=multiple`
 const questionDisplay = document.getElementById("question");
 
 
-//create alements 
-
-//const all the answer buttons
 
 async function getDataFromApi() {
     try {
@@ -49,10 +47,8 @@ async function getDataFromApi() {
             alert(data.error.message);
             return;
         }
-        //fix this later
-        const arrayQuestion = data.results[0,1,2,3,4,5,6,7,8,9].question;
-        // questionDisplay.innerText = firstQuestion
-
+        console.log(data)
+        const arrayQuestion = data.results;;
         return arrayQuestion;
 
     } catch (error) {
@@ -60,23 +56,22 @@ async function getDataFromApi() {
     }
 }
 
-// i want to take the data of the 10 objects in the array and display them dinamycaly after each other
+
+function displayQuestions(arrayQuestion) {
+
+        const firstQuestion = arrayQuestion[0].question;
+        console.log(firstQuestion);
+
+        const questionElement = document.createElement("p");
+        questionElement.innerText = `${firstQuestion}`;
+        questionDisplay.appendChild(questionElement);
 
 
-//remove when done
-// async function logData() {;
-//     console.log(data);
-// }
+}
 
-// logData();
-
-
-getDataFromApi();
-
-function displayQuestions() {
-
-    questionDisplay.innerText = arrayQuestion[0]
-
+function displayAnswers(arrayQuestion) {
+    const firstQuestionAnswers = [arrayQuestion[0].incorrect_answers, arrayQuestion[0].correct_answer]
+    console.log(firstQuestionAnswers);
 }
 
 
@@ -128,9 +123,22 @@ function closePopUp(nextButton, popUpWindow) {
    
 }
 
+//start quiz
 
-const { popUpWindow, nextButton } = createPopUp();
-openPopUp(popUpWindow)
-closePopUp(nextButton, popUpWindow)
+async function startQuiz() {
+    const arrayQuestion = await getDataFromApi(); 
+    console.log("Fetched Questions:", arrayQuestion); 
+    if (arrayQuestion) {
+        //here all functions
+        const { popUpWindow, nextButton } = createPopUp();
+        displayQuestions(arrayQuestion);
+        displayAnswers(arrayQuestion)
+        openPopUp(popUpWindow);
+        closePopUp(nextButton, popUpWindow);
+    } else {
+        console.error("No questions available to display.");
+    }
+}
 
-//create const createResult
+startQuiz();
+
