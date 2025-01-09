@@ -7,13 +7,14 @@
 
 //logic
 
-//start game
+//start game ( conect a button start to fx start quiz)
 //select category (not priority?)
-// get question
-//select answer
+// DONE get question
+//DONEselect answer
 // check if answer is correct or not
 //update score 
-//display correct or incorrect pop up
+// DONE display pop up
+//show in pop up if correct or incorrect
 //click on next question or exit game
 //show next question
 // update the current question counter 2/10
@@ -30,12 +31,13 @@ const body = document.querySelector("body");
 
 const apiUrl = `https://opentdb.com/api.php?amount=10&category=${9}&type=multiple`
 const questionDisplay = document.getElementById("question");
+const answerButtons = document.querySelectorAll(".btn-answer");
 
 
 
-async function getDataFromApi() {
+async function getDataFromApi(url) {
     try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(url);
 
         if (!response.ok) {
             throw new Error("Could not access data");
@@ -48,7 +50,7 @@ async function getDataFromApi() {
             return;
         }
         console.log(data)
-        const arrayQuestion = data.results;;
+        const arrayQuestion = data.results;
         return arrayQuestion;
 
     } catch (error) {
@@ -56,22 +58,50 @@ async function getDataFromApi() {
     }
 }
 
+  //create here a for each or loop for all questions
 
 function displayQuestions(arrayQuestion) {
 
-        const firstQuestion = arrayQuestion[0].question;
-        console.log(firstQuestion);
+    const currentQuestion = arrayQuestion[0].question;
+      
+    console.log(currentQuestion);
 
-        const questionElement = document.createElement("p");
-        questionElement.innerText = `${firstQuestion}`;
-        questionDisplay.appendChild(questionElement);
+    const questionElement = document.createElement("p");
+    questionElement.innerText = `${currentQuestion}`;
+    questionDisplay.appendChild(questionElement);
 
+    // return currentQuestion;
+}
+
+function randomizeAnswers(arrayQuestion) {
+    const firstQuestionAnswers = [...arrayQuestion[0].incorrect_answers, arrayQuestion[0].correct_answer]
+    console.log(firstQuestionAnswers);
+
+    const randomAnswers = firstQuestionAnswers.sort(() => Math.random() - 0.5);
+    console.log(randomAnswers);
+
+    return randomAnswers;
 
 }
 
-function displayAnswers(arrayQuestion) {
-    const firstQuestionAnswers = [arrayQuestion[0].incorrect_answers, arrayQuestion[0].correct_answer]
-    console.log(firstQuestionAnswers);
+
+
+function displayAnswers(randomAnswers, answerButtons) {
+   
+    answerButtons.forEach((button, index) => {
+        button.innerText = randomAnswers[index];
+    });
+}
+
+
+let currentQuestionNumber = 1
+console.log(currentQuestionNumber);
+
+
+function questionNumber (array, question){
+    let questionNumberDisplay = document.getElementById("current-question");
+    questionNumberDisplay.innerText =  `${question} / ${array.length}`
+
 }
 
 
@@ -99,18 +129,19 @@ function createPopUp() {
     return { popUpWindow, nextButton };
 }
 
-function openPopUp(popUpWindow) {
-    const answerButtons = document.querySelectorAll(".btn-answer");
 
-    answerButtons.forEach(button => {
+//change this to the parent ?
+//have another function that compares the target  (event.target) to know which button is clicked(?)
+function openPopUp(popUp, buttons) {
+
+
+    buttons.forEach(button => {
         button.addEventListener("click", () => {
-            popUpWindow.style.display= "flex";
+            popUp.style.display= "flex";
 
         })
 
     });
-    return { answerButtons };
-
 
 };
 
@@ -123,18 +154,21 @@ function closePopUp(nextButton, popUpWindow) {
    
 }
 
-//start quiz
-
 async function startQuiz() {
-    const arrayQuestion = await getDataFromApi(); 
-    console.log("Fetched Questions:", arrayQuestion); 
+    const arrayQuestion = await getDataFromApi(apiUrl); 
+    console.log("Fetched Questions:", arrayQuestion[0]); 
+
     if (arrayQuestion) {
         //here all functions
         const { popUpWindow, nextButton } = createPopUp();
+        // const { currentQuestion} = displayQuestions(arrayQuestion);
         displayQuestions(arrayQuestion);
-        displayAnswers(arrayQuestion)
-        openPopUp(popUpWindow);
+        const randomAnswers = randomizeAnswers(arrayQuestion);
+        questionNumber(arrayQuestion, currentQuestionNumber);
+        openPopUp(popUpWindow, answerButtons);
         closePopUp(nextButton, popUpWindow);
+        displayAnswers(randomAnswers, answerButtons);
+   
     } else {
         console.error("No questions available to display.");
     }
