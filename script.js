@@ -1,11 +1,40 @@
 const body = document.querySelector("body");
+const main = document.getElementById("main")
 
 const apiUrl = `https://opentdb.com/api.php?amount=10&category=${9}&type=multiple`
 const questionDisplay = document.getElementById("question");
 const answerButtons = document.querySelectorAll(".btn-answer");
+const popUpText = document.createElement("p");
 
-let currentQuestionNumber = 1 
+let score = 0
+let currentQuestionNumber = 0 
 let arrayQuestion = [];
+
+function homePage() {
+    main 
+    const homepage = document.createElement ("div")
+    homepage.classList.add("homepage-container")
+
+    const titleHome = document.createElement ("h1")
+    titleHome.classList.add("title-home")
+    titleHome.innerText("Trivia")
+
+    const category = document.createElement("select")
+    const option1 = document.createElement("option")
+    option1.innerText("General Knowledge")
+
+    const option2 = document.createElement("option")
+    option2.innerText("Geography")
+    const option3 = document.createElement("option")
+    option3.innerText("Video Games")
+
+    category.appendChild(option1,option2,option3)
+
+    main.appendChild(homepage)
+
+
+    
+}
 
 async function getDataFromApi(url) {
     try {
@@ -31,16 +60,21 @@ async function getDataFromApi(url) {
 }
 
 
-
-  //create here a for each or loop for all questions
-
 function displayQuestions() {
 
     const currentQuestion = arrayQuestion[currentQuestionNumber].question;
+    const cleanQuestion = currentQuestion.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#039;/g, "'");
 
     const questionElement = document.createElement("p");
-    questionElement.innerText = currentQuestion;
+    questionElement.innerText = cleanQuestion;
     questionDisplay.appendChild(questionElement);
+
+}
+
+
+function clearQuestion () {
+    
+    questionDisplay.innerText="";
 }
 
 
@@ -55,7 +89,6 @@ function randomizeAnswers() {
 
 }
 
-//QUESTION: i tried to make this fx reusable, but is it really if I set up the randomAnswers as a parameter? :o
 function displayAnswers() {
 
     const randomAnswers = randomizeAnswers();
@@ -66,15 +99,10 @@ function displayAnswers() {
 }
 
 
-
-
-
-
-
-//this is not working
+//tried to make it reusable 
 function displayQuestionNumber (array, currentQuestionNumber){
     let questionNumberDisplay = document.getElementById("current-question");
-     questionNumberDisplay.innerText = `${currentQuestionNumber} / ${array.length}`
+     questionNumberDisplay.innerText = `${currentQuestionNumber + 1} / ${array.length}`
 
 }
 
@@ -89,7 +117,6 @@ function updateQuestionNumber() {
 function createPopUp() {
 
     const popUpWindow = document.createElement("div");
-    const popUpText = document.createElement("p");
     const nextButton = document.createElement("button");
 
     
@@ -98,7 +125,6 @@ function createPopUp() {
 
    
     popUpText.classList.add("popUp-text");
-    popUpText.innerText = `answer is:`;
     popUpWindow.appendChild(popUpText);
 
     
@@ -109,18 +135,22 @@ function createPopUp() {
 
     nextButton.addEventListener("click", () => {
         console.log("next question btn clicked")
+
+       const questionElement = displayQuestions()
+       clearQuestion (questionElement)
        updateQuestionNumber();
+       displayQuestionNumber(arrayQuestion, currentQuestionNumber);
        displayQuestions();
        displayAnswers();
         closePopUp(popUpWindow);
     });
 
-    return popUpWindow; 
+    return popUpWindow;
 }
 
 function openPopUp(popUp) {
 
-            popUp.style.display= "flex";
+    popUp.style.display= "flex";
 
 }
 
@@ -131,15 +161,32 @@ function closePopUp(popUp) {
    
 }
 
+
+function checkCorrectAnswer(selectedAnswer) {
+
+    const correct_answer = arrayQuestion[currentQuestionNumber].correct_answer;
+    if ( selectedAnswer === correct_answer) {
+            console.log("yay")
+            popUpText.innerText = "correct";
+            score++
+    }
+    else {
+        console.log("incorrect sorry")
+        popUpText.innerText = "incorrect";
+    }
+}
+
+
 function clickAnyAnswer (buttons, popUp) {
 
     buttons.forEach((button) => {
         button.addEventListener("click", () =>{
             openPopUp(popUp);
+            const selectedAnswer = button.innerText;
+            checkCorrectAnswer(selectedAnswer);
 
     })
    
-        // checkCorrectAnswer(); create this one
     })
 }
 
