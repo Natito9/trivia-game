@@ -39,7 +39,7 @@ async function getDataFromApi(url) {
 function displayQuestions() {
 
     const currentQuestion = arrayQuestion[currentQuestionNumber].question;
-    const cleanQuestion = currentQuestion.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#039;/g, "'");
+    const cleanQuestion = currentQuestion.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#039;/g, "'").replace(/&iacute;/g, "Í");
 
     const questionElement = document.createElement("p");
     questionElement.innerText = cleanQuestion;

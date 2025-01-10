@@ -47,7 +47,7 @@ body {
     gap: 2rem;
 }
 
-button.btn-answer {
+#main button {
     grid-column: auto;
     grid-row: auto;
     height:fit-content;
@@ -66,17 +66,43 @@ button.btn-answer {
     user-select: none;
     touch-action: manipulation;
 
-} 
+}
 
-
-button.btn-answer:hover {
+#main button:hover{
     box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
     transform: translate3d(0, 2px, 0);
     background-color: var(--primary-color-hover);
 }
+/* button.btn-answer {
+    grid-column: auto;
+    grid-row: auto;
+    height:fit-content;
+    width:70%;
+    padding:1rem;
+    font-size: 1rem;;
+    font-family: var(--main-font);
+    background-color: var(--primary-color);
+    border: solid rgb(118, 55, 2) 0px;
+    box-shadow: rgb(118, 55, 2) 1px 0px 0px, rgb(118, 55, 2)  2px 2px 0px 0px, rgb(118, 55, 2) 3px 3px 0px 0px, rgb(118, 55, 2) 4px 4px 0px 0px, rgb(118, 55, 2) 5px 5px 0px 0px;
+    box-sizing: border-box;
+    color: #41403e;
+    cursor: pointer;
+    display: inline-block;
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+    touch-action: manipulation;
+
+}  */
+
+
+/* button.btn-answer:hover {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+    transform: translate3d(0, 2px, 0);
+    background-color: var(--primary-color-hover);
+} */
 
 /* add here later background colors for correct sn incorrect  */
-button.btn-answer:focus {
+#main button:focus {
     box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
 }
 
