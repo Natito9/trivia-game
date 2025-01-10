@@ -1,5 +1,6 @@
+
 const body = document.querySelector("body");
-const main = document.getElementById("main")
+
 
 const apiUrl = `https://opentdb.com/api.php?amount=10&category=${9}&type=multiple`
 const questionDisplay = document.getElementById("question");
@@ -10,31 +11,6 @@ let score = 0
 let currentQuestionNumber = 0 
 let arrayQuestion = [];
 
-function homePage() {
-    main 
-    const homepage = document.createElement ("div")
-    homepage.classList.add("homepage-container")
-
-    const titleHome = document.createElement ("h1")
-    titleHome.classList.add("title-home")
-    titleHome.innerText("Trivia")
-
-    const category = document.createElement("select")
-    const option1 = document.createElement("option")
-    option1.innerText("General Knowledge")
-
-    const option2 = document.createElement("option")
-    option2.innerText("Geography")
-    const option3 = document.createElement("option")
-    option3.innerText("Video Games")
-
-    category.appendChild(option1,option2,option3)
-
-    main.appendChild(homepage)
-
-
-    
-}
 
 async function getDataFromApi(url) {
     try {
@@ -136,8 +112,9 @@ function createPopUp() {
     nextButton.addEventListener("click", () => {
         console.log("next question btn clicked")
 
-       const questionElement = displayQuestions()
-       clearQuestion (questionElement)
+    
+       const questionElement = displayQuestions();
+       clearQuestion (questionElement);
        updateQuestionNumber();
        displayQuestionNumber(arrayQuestion, currentQuestionNumber);
        displayQuestions();
@@ -164,8 +141,8 @@ function closePopUp(popUp) {
 
 function checkCorrectAnswer(selectedAnswer) {
 
-    const correct_answer = arrayQuestion[currentQuestionNumber].correct_answer;
-    if ( selectedAnswer === correct_answer) {
+    const correctAnswer = arrayQuestion[currentQuestionNumber].correct_answer;
+    if ( selectedAnswer === correctAnswer) {
             console.log("yay")
             popUpText.innerText = "correct";
             score++
@@ -191,8 +168,6 @@ function clickAnyAnswer (buttons, popUp) {
 }
 
 
-
-
 async function startQuiz() {
     await getDataFromApi(apiUrl); 
     // console.log("Fetched Questions:", arrayQuestion[0]); 
@@ -211,4 +186,6 @@ async function startQuiz() {
 }
 
 startQuiz();
+
+
 

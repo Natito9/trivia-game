@@ -15,13 +15,10 @@
         <button id="quit-game"></button>
         <h1 id="current-category">Current category</h1>
         <p id="current-question"></p>
-        <select id="category" name="category" required>
-            <option value="9">General Knowledge</option>
-            <option value="22">Geography</option>
-            <option value="15">Video Games</option>
-        </select>
+        
     </nav>
     <section id="main">
+    <div id="gameOn">
        <div id="container-question" class="question-container">
             <p id="question"></p>
         </div>
@@ -31,11 +28,12 @@
             <button class="btn-answer c">Answer 3</button>
             <button class="btn-answer d">Answer 4</button>
         </div>
+    </div>
      
     </section>
-    <!-- do i need a footer? -->
-    <footer>
-    </footer>
-    <script src="script.js"></script>
+
+    <script type="module" src="homepage.js"></script>
+    <script type="module" src="script.js"></script>
+
 </body>
 </html>
