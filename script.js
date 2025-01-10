@@ -1,39 +1,11 @@
-//visual aspects
-
-//game start display
-// DONE trivia display in main
-//correct and incorrent display
-//game ends display
-
-//logic
-
-//start game ( conect a button start to fx start quiz)
-//select category (not priority?)
-// DONE get question
-//DONEselect answer
-// check if answer is correct or not
-//update score 
-// DONE display pop up
-//show in pop up if correct or incorrect
-//click on next question or exit game
-//show next question
-// update the current question counter 2/10
-//end game
-//show final score and option to play again
-
-//need
-
-//DONE api call
-//handle 404 error with pop up
-//fetch different categories changing the api url
-
 const body = document.querySelector("body");
 
 const apiUrl = `https://opentdb.com/api.php?amount=10&category=${9}&type=multiple`
 const questionDisplay = document.getElementById("question");
 const answerButtons = document.querySelectorAll(".btn-answer");
 
-
+let currentQuestionNumber = 1 
+let arrayQuestion = [];
 
 async function getDataFromApi(url) {
     try {
@@ -49,8 +21,8 @@ async function getDataFromApi(url) {
             alert(data.error.message);
             return;
         }
-        console.log(data)
-        const arrayQuestion = data.results;
+
+        arrayQuestion = data.results;
         return arrayQuestion;
 
     } catch (error) {
@@ -58,35 +30,35 @@ async function getDataFromApi(url) {
     }
 }
 
+
+
   //create here a for each or loop for all questions
 
-function displayQuestions(arrayQuestion) {
+function displayQuestions() {
 
-    const currentQuestion = arrayQuestion[0].question;
-      
-    console.log(currentQuestion);
+    const currentQuestion = arrayQuestion[currentQuestionNumber].question;
 
     const questionElement = document.createElement("p");
-    questionElement.innerText = `${currentQuestion}`;
+    questionElement.innerText = currentQuestion;
     questionDisplay.appendChild(questionElement);
-
-    // return currentQuestion;
 }
 
-function randomizeAnswers(arrayQuestion) {
-    const firstQuestionAnswers = [...arrayQuestion[0].incorrect_answers, arrayQuestion[0].correct_answer]
-    console.log(firstQuestionAnswers);
 
-    const randomAnswers = firstQuestionAnswers.sort(() => Math.random() - 0.5);
+function randomizeAnswers() {
+    const answers = [...arrayQuestion[currentQuestionNumber].incorrect_answers, arrayQuestion[currentQuestionNumber].correct_answer]
+    console.log(answers);
+
+    const randomAnswers = answers.sort(() => Math.random() - 0.5);
     console.log(randomAnswers);
 
     return randomAnswers;
 
 }
 
+//QUESTION: i tried to make this fx reusable, but is it really if I set up the randomAnswers as a parameter? :o
+function displayAnswers() {
 
-
-function displayAnswers(randomAnswers, answerButtons) {
+    const randomAnswers = randomizeAnswers();
    
     answerButtons.forEach((button, index) => {
         button.innerText = randomAnswers[index];
@@ -94,13 +66,21 @@ function displayAnswers(randomAnswers, answerButtons) {
 }
 
 
-let currentQuestionNumber = 1
-console.log(currentQuestionNumber);
 
 
-function questionNumber (array, question){
+
+
+
+//this is not working
+function displayQuestionNumber (array, currentQuestionNumber){
     let questionNumberDisplay = document.getElementById("current-question");
-    questionNumberDisplay.innerText =  `${question} / ${array.length}`
+     questionNumberDisplay.innerText = `${currentQuestionNumber} / ${array.length}`
+
+}
+
+function updateQuestionNumber() {
+    currentQuestionNumber++;
+    console.log("updated question number") 
 
 }
 
@@ -123,54 +103,63 @@ function createPopUp() {
 
     
     nextButton.classList.add("next-question-button");
+    nextButton.id = "nextQuestion";
     nextButton.innerText = "Next Question";
     popUpWindow.appendChild(nextButton);
 
-    return { popUpWindow, nextButton };
-}
-
-
-//change this to the parent ?
-//have another function that compares the target  (event.target) to know which button is clicked(?)
-function openPopUp(popUp, buttons) {
-
-
-    buttons.forEach(button => {
-        button.addEventListener("click", () => {
-            popUp.style.display= "flex";
-
-        })
-
+    nextButton.addEventListener("click", () => {
+        console.log("next question btn clicked")
+       updateQuestionNumber();
+       displayQuestions();
+       displayAnswers();
+        closePopUp(popUpWindow);
     });
 
-};
+    return popUpWindow; 
+}
 
-function closePopUp(nextButton, popUpWindow) {
+function openPopUp(popUp) {
 
-    nextButton.addEventListener("click", () =>{
-        popUpWindow.style.display = "none";
-        
-    })
+            popUp.style.display= "flex";
+
+}
+
+
+function closePopUp(popUp) {
+
+        popUp.style.display = "none"; 
    
 }
 
+function clickAnyAnswer (buttons, popUp) {
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", () =>{
+            openPopUp(popUp);
+
+    })
+   
+        // checkCorrectAnswer(); create this one
+    })
+}
+
+
+
+
 async function startQuiz() {
-    const arrayQuestion = await getDataFromApi(apiUrl); 
-    console.log("Fetched Questions:", arrayQuestion[0]); 
+    await getDataFromApi(apiUrl); 
+    // console.log("Fetched Questions:", arrayQuestion[0]); 
 
     if (arrayQuestion) {
-        //here all functions
-        const { popUpWindow, nextButton } = createPopUp();
-        // const { currentQuestion} = displayQuestions(arrayQuestion);
-        displayQuestions(arrayQuestion);
-        const randomAnswers = randomizeAnswers(arrayQuestion);
-        questionNumber(arrayQuestion, currentQuestionNumber);
-        openPopUp(popUpWindow, answerButtons);
-        closePopUp(nextButton, popUpWindow);
-        displayAnswers(randomAnswers, answerButtons);
+      
+        displayQuestions();
+        displayAnswers();
+        displayQuestionNumber(arrayQuestion, currentQuestionNumber);
+        const popUpWindow = createPopUp();
+        clickAnyAnswer(answerButtons, popUpWindow);
    
     } else {
-        console.error("No questions available to display.");
+        console.error("No questions to display.");
     }
 }
 
