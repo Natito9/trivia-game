@@ -1,6 +1,6 @@
 
 const body = document.querySelector("body");
-
+ export {body}
 
 const apiUrl = `https://opentdb.com/api.php?amount=10&category=${9}&type=multiple`
 const questionDisplay = document.getElementById("question");
@@ -110,10 +110,9 @@ function createPopUp() {
     popUpWindow.appendChild(nextButton);
 
     nextButton.addEventListener("click", () => {
-        console.log("next question btn clicked")
+        // console.log("next question btn clicked")
 
-    
-       const questionElement = displayQuestions();
+        const questionElement = displayQuestions();
        clearQuestion (questionElement);
        updateQuestionNumber();
        displayQuestionNumber(arrayQuestion, currentQuestionNumber);

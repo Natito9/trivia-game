@@ -2,6 +2,7 @@ const main = document.getElementById("main")
 const homepage = document.createElement("div")
 const game = document.getElementById("gameOn")
 
+export{homepage, game}
 
 
 function homePage() {
