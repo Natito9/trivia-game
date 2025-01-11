@@ -21,7 +21,7 @@
 }
 /* 
 i can try to habe all the styling for all butotns the same :) later */
-.next-question-button{
+/* .next-question-button{
     height:fit-content;
     width:70%;
     padding:1rem;
@@ -37,7 +37,7 @@ i can try to habe all the styling for all butotns the same :) later */
     transition: all 0.2s ease-in-out;
     user-select: none;
     touch-action: manipulation;
-}
+} */
 
 
 .next-question-button:hover {

@@ -10,6 +10,12 @@ function exitPopUp() {
     console.log("exit pop up is displayed")
     
     exitWindow.classList.add("exit-popup")
+    continueButton.classList.add("continue-button")
+    exitButton2.classList.add("exit-button2")
+
+
+    continueButton.innerText="continue"
+    exitButton2.innerText="exit"
 
     exitWindow.appendChild(continueButton)
     exitWindow.appendChild(exitButton2)
@@ -24,13 +30,19 @@ function exitGame () {
     exitWindow.style.display="none"
     game.style.display="none"
     homepage.style.display="grid"
-
+    //add here to reset score
+    //reset display import the fx 
 
 }
 
 //dont understand why exitGame and not exitGAme()
 exitButton.addEventListener("click",exitPopUp);
 exitButton2.addEventListener("click",exitGame);
+
+continueButton.addEventListener("click", () =>{
+
+    exitWindow.style.display="none"
+})
 
    
 
