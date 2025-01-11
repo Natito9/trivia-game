@@ -6,6 +6,7 @@ const apiUrl = `https://opentdb.com/api.php?amount=10&category=${9}&type=multipl
 const questionDisplay = document.getElementById("question");
 const answerButtons = document.querySelectorAll(".btn-answer");
 const popUpText = document.createElement("p");
+const correctAnswerText= document.createElement("p")
 
 let score = 0
 let currentQuestionNumber = 0 
@@ -94,16 +95,15 @@ function createPopUp() {
 
     const popUpWindow = document.createElement("div");
     const nextButton = document.createElement("button");
-
     
     popUpWindow.classList.add("popUp-window");
     body.appendChild(popUpWindow);
-
    
     popUpText.classList.add("popUp-text");
     popUpWindow.appendChild(popUpText);
 
-    
+    popUpWindow.appendChild(correctAnswerText)
+
     nextButton.classList.add("next-question-button");
     nextButton.id = "nextQuestion";
     nextButton.innerText = "Next Question";
@@ -127,7 +127,6 @@ function createPopUp() {
 function openPopUp(popUp) {
 
     popUp.style.display= "flex";
-
 }
 
 
@@ -144,12 +143,17 @@ function checkCorrectAnswer(selectedAnswer) {
     if ( selectedAnswer === correctAnswer) {
             console.log("yay")
             popUpText.innerText = "correct";
+            popUpText.style.color="var(--correct-color)"
+            correctAnswerText.innerText = ""
             score++
+
     }
     else {
         console.log("incorrect sorry")
         popUpText.innerText = "incorrect";
-    }
+         popUpText.style.color="var(--incorrect-color)"
+        correctAnswerText.innerText = `correct answer: ${correctAnswer}`
+    }   
 }
 
 
@@ -185,6 +189,3 @@ async function startQuiz() {
 }
 
 startQuiz();
-
-
-

@@ -1,8 +1,11 @@
 .homepage-container {
-    display:grid;
+    display:flex;
+    flex-direction: column;
     z-index: 1000;
     align-items: center;
-    justify-items: center;
+    justify-content: center;
+    gap: 2rem;
+    height:80vh;
 }
 
 select {
@@ -40,4 +43,8 @@ select {
     transition: all 0.2s ease-in-out;
     user-select: none;
     touch-action: manipulation;
+}
+
+.title-home {
+
 }

@@ -1,7 +1,9 @@
 import {homepage, game} from "./homepage.js"
 import {body} from "./script.js"
 
-const exitButton = document.getElementById("quit-game");
+
+
+export const exitButton = document.getElementById("quit-game");
 const continueButton = document.createElement("button");
 const exitButton2 = document.createElement("button");
 const exitWindow = document.createElement("div")
@@ -15,7 +17,7 @@ function exitPopUp() {
 
 
     continueButton.innerText="continue"
-    exitButton2.innerText="exit"
+    exitButton2.innerText="exit game"
 
     exitWindow.appendChild(continueButton)
     exitWindow.appendChild(exitButton2)

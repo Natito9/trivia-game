@@ -3,16 +3,17 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.74);
+    background-color: var(--popUps-background);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    width: 80%;
+    width: 50%;
     height: 60%;
     display: none;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
+    gap:2rem;
     align-items: center;
 }
 
@@ -46,4 +47,13 @@
     transform: translate3d(0, 2px, 0);
     background-color: var(--incorrect-color);
     
+}
+
+@media screen and (max-width: 600px) {
+    /* Styles for mobile screens */
+    .exit-popup {
+        width: 80%;
+        height: 60%;
+        
+    }
 }

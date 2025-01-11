@@ -6,7 +6,8 @@
     --text-primary-color: #262b30;
     --text-secondary-color: #fcfcfc;
     --correct-color: #71CD63;
-    --incorrect-color: #dc3545;
+    --incorrect-color: #fa2339;
+    --popUps-background: rgba(255, 255, 255, 0.93);
 
     --main-font: "Luckiest Guy", Monserrat, sans-serif;
 }
@@ -96,3 +97,4 @@ button.d {
     justify-self: start;
     align-self: start;
 }
+
