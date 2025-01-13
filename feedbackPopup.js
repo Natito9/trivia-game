@@ -3,6 +3,7 @@ import {clearQuestion, updateQuestionNumber, displayQuestionNumber,
 
 export const popUpText = document.createElement("p");
 export const correctAnswerText= document.createElement("p")
+export const scoreDisplay = document.createElement("p")
 
 export function createPopUp() {
 
@@ -12,18 +13,17 @@ export function createPopUp() {
     popUpWindow.classList.add("popUp-window");
     body.appendChild(popUpWindow);
    
-    popUpText.classList.add("popUp-text");
-    popUpWindow.appendChild(popUpText);
-
+    popUpText.classList.add("popUp-text")
+    popUpWindow.appendChild(popUpText)
     popUpWindow.appendChild(correctAnswerText)
-
+    popUpWindow.appendChild(scoreDisplay)
+    scoreDisplay.id="scoreDisplay"
     nextButton.classList.add("next-question-button");
     nextButton.id = "nextQuestion";
     nextButton.innerText = "Next Question";
     popUpWindow.appendChild(nextButton);
 
     nextButton.addEventListener("click", () => {
-        // console.log("next question btn clicked")
 
         const questionElement = displayQuestions();
        clearQuestion (questionElement);
@@ -33,7 +33,7 @@ export function createPopUp() {
        displayAnswers();
         closePopUp(popUpWindow);
     });
-
+    //check if this is beign used!!
     return popUpWindow;
 }
 
@@ -47,3 +47,6 @@ export function closePopUp(popUp) {
     popUp.style.display = "none"; 
    
 }
+
+
+// ask! i create an element here but I want to change it in the main js??? is that ok or is messy?? its the score display, should I move it?

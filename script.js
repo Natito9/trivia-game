@@ -1,6 +1,8 @@
 
-import {popUpText, correctAnswerText, createPopUp, openPopUp} from "./feedbackPopup.js"
+import {popUpText, correctAnswerText, createPopUp, openPopUp, scoreDisplay} from "./feedbackPopup.js"
 import { navTitle, selectedCategory } from "./homepage.js";
+//check this after fixing not need all of variableds
+import { updateScore, score} from "./score.js";
 export const body = document.querySelector("body");
 
 
@@ -9,7 +11,7 @@ const questionDisplay = document.getElementById("question");
 const answerButtons = document.querySelectorAll(".btn-answer");
 
 
-let score = 0
+
 export let currentQuestionNumber = 0 
 export let arrayQuestion = [];
 
@@ -88,7 +90,7 @@ export {questionNumberDisplay};
 
 export function updateQuestionNumber() {
     currentQuestionNumber++;
-    console.log("updated question number") 
+
 
 }
 
@@ -100,8 +102,11 @@ function checkCorrectAnswer(selectedAnswer) {
             console.log("yay")
             popUpText.innerText = "correct";
             popUpText.style.color="var(--correct-color)"
-            correctAnswerText.innerText = ""
-            score++
+            correctAnswerText.innerText = `correct answer: ${correctAnswer}`
+            score+=10;
+            // scoreDisplay.innerText= `Score: ${score}`
+            updateScore()
+            // score++
 
     }
     else {
@@ -109,6 +114,9 @@ function checkCorrectAnswer(selectedAnswer) {
         popUpText.innerText = "incorrect";
          popUpText.style.color="var(--incorrect-color)"
         correctAnswerText.innerText = `correct answer: ${correctAnswer}`
+        updateScore()
+        //    scoreDisplay.innerText= `Score: ${score}`
+       
     }   
 }
 
@@ -125,17 +133,19 @@ function clickAnyAnswer (buttons, popUp) {
 }
 
 function displayCurrentCategory () {
-
+    //askk about this! when fx returns 2 variables is necesary the {}? and then when 1 variable no {}
     const {selectedCategoryText} = selectedCategory();
     navTitle.innerText = `${selectedCategoryText}`
 }
+
+
 
 
 export async function startQuiz() {
     await getDataFromApi(apiUrl); 
 
     if (arrayQuestion) {
-      
+        //ask! why sometimes i need to pass variable when calling a fx? or maybe not? in displayQuestionNumber
         displayQuestions();
         displayAnswers();
         displayQuestionNumber(arrayQuestion, currentQuestionNumber);
