@@ -1,16 +1,17 @@
 
-const body = document.querySelector("body");
- export {body}
+import {popUpText, correctAnswerText, createPopUp, openPopUp} from "./feedbackPopup.js"
+import { navTitle, selectedCategory } from "./homepage.js";
+export const body = document.querySelector("body");
+
 
 const apiUrl = `https://opentdb.com/api.php?amount=10&category=${9}&type=multiple`
 const questionDisplay = document.getElementById("question");
 const answerButtons = document.querySelectorAll(".btn-answer");
-const popUpText = document.createElement("p");
-const correctAnswerText= document.createElement("p")
+
 
 let score = 0
-let currentQuestionNumber = 0 
-let arrayQuestion = [];
+export let currentQuestionNumber = 0 
+export let arrayQuestion = [];
 
 
 async function getDataFromApi(url) {
@@ -37,7 +38,7 @@ async function getDataFromApi(url) {
 }
 
 
-function displayQuestions() {
+export function displayQuestions() {
 
     const currentQuestion = arrayQuestion[currentQuestionNumber].question;
     const cleanQuestion = currentQuestion.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#039;/g, "'").replace(/&iacute;/g, "Í");
@@ -49,7 +50,7 @@ function displayQuestions() {
 }
 
 
-function clearQuestion () {
+export function clearQuestion () {
     
     questionDisplay.innerText="";
 }
@@ -66,7 +67,7 @@ function randomizeAnswers() {
 
 }
 
-function displayAnswers() {
+export function displayAnswers() {
 
     const randomAnswers = randomizeAnswers();
    
@@ -77,63 +78,18 @@ function displayAnswers() {
 
 
 //tried to make it reusable 
-function displayQuestionNumber (array, currentQuestionNumber){
+export function displayQuestionNumber (array, currentQuestionNumber){
     let questionNumberDisplay = document.getElementById("current-question");
      questionNumberDisplay.innerText = `${currentQuestionNumber + 1} / ${array.length}`
-
+    return questionNumberDisplay;
 }
+let questionNumberDisplay
+export {questionNumberDisplay};
 
-function updateQuestionNumber() {
+export function updateQuestionNumber() {
     currentQuestionNumber++;
     console.log("updated question number") 
 
-}
-
-
-// pop up window handling
-function createPopUp() {
-
-    const popUpWindow = document.createElement("div");
-    const nextButton = document.createElement("button");
-    
-    popUpWindow.classList.add("popUp-window");
-    body.appendChild(popUpWindow);
-   
-    popUpText.classList.add("popUp-text");
-    popUpWindow.appendChild(popUpText);
-
-    popUpWindow.appendChild(correctAnswerText)
-
-    nextButton.classList.add("next-question-button");
-    nextButton.id = "nextQuestion";
-    nextButton.innerText = "Next Question";
-    popUpWindow.appendChild(nextButton);
-
-    nextButton.addEventListener("click", () => {
-        // console.log("next question btn clicked")
-
-        const questionElement = displayQuestions();
-       clearQuestion (questionElement);
-       updateQuestionNumber();
-       displayQuestionNumber(arrayQuestion, currentQuestionNumber);
-       displayQuestions();
-       displayAnswers();
-        closePopUp(popUpWindow);
-    });
-
-    return popUpWindow;
-}
-
-function openPopUp(popUp) {
-
-    popUp.style.display= "flex";
-}
-
-
-function closePopUp(popUp) {
-
-        popUp.style.display = "none"; 
-   
 }
 
 
@@ -164,16 +120,19 @@ function clickAnyAnswer (buttons, popUp) {
             openPopUp(popUp);
             const selectedAnswer = button.innerText;
             checkCorrectAnswer(selectedAnswer);
-
     })
-   
     })
 }
 
+function displayCurrentCategory () {
 
-async function startQuiz() {
+    const {selectedCategoryText} = selectedCategory();
+    navTitle.innerText = `${selectedCategoryText}`
+}
+
+
+export async function startQuiz() {
     await getDataFromApi(apiUrl); 
-    // console.log("Fetched Questions:", arrayQuestion[0]); 
 
     if (arrayQuestion) {
       
@@ -182,10 +141,10 @@ async function startQuiz() {
         displayQuestionNumber(arrayQuestion, currentQuestionNumber);
         const popUpWindow = createPopUp();
         clickAnyAnswer(answerButtons, popUpWindow);
+        displayCurrentCategory ()
    
     } else {
         console.error("No questions to display.");
     }
 }
 
-startQuiz();
