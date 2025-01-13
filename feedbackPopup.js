@@ -4,11 +4,12 @@ import {clearQuestion, updateQuestionNumber, displayQuestionNumber,
 export const popUpText = document.createElement("p");
 export const correctAnswerText= document.createElement("p")
 export const scoreDisplay = document.createElement("p")
+export const nextButton = document.createElement("button");
 
 export function createPopUp() {
-
+    //is it better to export this element and take it out from here ? probably :) ASK
     const popUpWindow = document.createElement("div");
-    const nextButton = document.createElement("button");
+
     
     popUpWindow.classList.add("popUp-window");
     body.appendChild(popUpWindow);

@@ -106,7 +106,7 @@ function checkCorrectAnswer(selectedAnswer) {
             score+=10;
             // scoreDisplay.innerText= `Score: ${score}`
             updateScore()
-            // score++
+           
 
     }
     else {
