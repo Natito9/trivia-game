@@ -1,19 +1,18 @@
 
 import {popUpText, correctAnswerText, createPopUp, openPopUp, scoreDisplay} from "./feedbackPopup.js"
+//selected category to change url also? check later
 import { navTitle, selectedCategory } from "./homepage.js";
 //check this after fixing not need all of variableds
-import { updateScore, score} from "./score.js";
-export const body = document.querySelector("body");
+import { updateScore} from "./score.js";
 
+export const body = document.querySelector("body");
+export let currentQuestionNumber = 0 
+export let arrayQuestion = [];
+export let score = 0
 
 const apiUrl = `https://opentdb.com/api.php?amount=10&category=${9}&type=multiple`
 const questionDisplay = document.getElementById("question");
 const answerButtons = document.querySelectorAll(".btn-answer");
-
-
-
-export let currentQuestionNumber = 0 
-export let arrayQuestion = [];
 
 
 async function getDataFromApi(url) {
@@ -104,8 +103,8 @@ function checkCorrectAnswer(selectedAnswer) {
             popUpText.style.color="var(--correct-color)"
             correctAnswerText.innerText = `correct answer: ${correctAnswer}`
             score+=10;
-            // scoreDisplay.innerText= `Score: ${score}`
-            updateScore()
+            scoreDisplay.innerText= `Score: ${score}`
+            // updateScore()
            
 
     }
@@ -114,8 +113,8 @@ function checkCorrectAnswer(selectedAnswer) {
         popUpText.innerText = "incorrect";
          popUpText.style.color="var(--incorrect-color)"
         correctAnswerText.innerText = `correct answer: ${correctAnswer}`
-        updateScore()
-        //    scoreDisplay.innerText= `Score: ${score}`
+        // updateScore()
+           scoreDisplay.innerText= `Score: ${score}`
        
     }   
 }

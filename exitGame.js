@@ -25,7 +25,7 @@ function exitPopUp() {
   exitWindow.style.display="flex"
 }
 
-function exitGame () {
+export function exitGame () {
     console.log("exit game")
     exitWindow.style.display="none"
     game.style.display="none"
