@@ -1,27 +1,45 @@
-//here all the game over things
-//change the popup text
-// button to show view results
-import { scoreDisplay, nextButton } from "./feedbackPopup.js";
-import { arrayQuestion, currentQuestionNumber } from "./script.js";
-import {exitGame} from "./exitGame.js"
-if (currentQuestionNumber === 10) {
-    
-    nextButton.innerText="View results"
-    nextButton.addEventListener("click", () =>{
-            resultsGameOver()
-    })
-}
-else {
-    //keep playing
+import { homePage } from "./homepage.js";
+import {
+  arrayQuestion,
+  currentQuestionNumber,
+  score,
+  resetGame,
+} from "./script.js";
+import { closePopUp } from "./feedbackPopup.js";
+
+const gameOverContainer = document.querySelector(".gameOver");
+const totalScoreDisplay = document.getElementById("totalScore");
+const toHomeButton = document.querySelector(".exit-game-button");
+
+function goToHome() {
+  toHomeButton.addEventListener("click", () => {
+    gameOverContainer.style.display = "none";
+    homePage();
+  });
 }
 
-// when this button is clicked... this:
-function resultsGameOver(){
-    scoreDisplay.innerText= `Your final score is: ${score}/ ${arrayQuestion .length * 10}`
-    nextButton.innerText= "To homepage"
-    nextButton.addEventListener("click", () =>{
-        exitGame()
-    })
+function resultsGameOver() {
+  closePopUp();
+  const questionDisplay = document.getElementById("question");
+  questionDisplay.style.display = "none";
+
+  gameOverContainer.style.display = "flex";
+  totalScoreDisplay.innerText = `Your final score is: ${score}/ ${
+    arrayQuestion.length * 10
+  }`;
+  goToHome();
 }
 
-//probably nextbutton becomes exit and use exitGame()
+export function checkIfGameOver() {
+  let something = currentQuestionNumber;
+
+  switch (something) {
+    case 10:
+      resultsGameOver();
+      resetGame();
+
+      break;
+
+    default:
+  }
+}

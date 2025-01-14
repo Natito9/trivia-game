@@ -1,100 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Jersey+20&family=Luckiest+Guy&family=Rubik+Scribble&family=Work+Sans:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Jersey+20&family=Luckiest+Guy&family=Rubik+Scribble&family=Work+Sans:wght@600&display=swap");
 
 :root {
-    --primary-color: #FF812F;
-    --primary-color-hover:#f9ee7d;
-    --text-primary-color: #262b30;
-    --text-secondary-color: #fcfcfc;
-    --correct-color: #71CD63;
-    --incorrect-color: #fa2339;
-    --popUps-background: rgba(255, 255, 255, 0.93);
+  --primary-color: #ff812f;
+  --primary-color-hover: #f9ee7d;
+  --text-primary-color: #262b30;
+  --text-secondary-color: #fcfcfc;
+  --correct-color: #71cd63;
+  --incorrect-color: #fa2339;
+  --popUps-background: rgba(255, 255, 255, 0.93);
 
-    --main-font: "Luckiest Guy", Monserrat, sans-serif;
+  --main-font: "Luckiest Guy", Monserrat, sans-serif;
 }
 
 body {
-    font-family: var(--main-font);
-    color: var(--text-primary-color);
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 15vh 85vh;
-  
+  font-family: var(--main-font);
+  color: var(--text-primary-color);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 15vh 85vh;
 }
 
 #main {
-    grid-row: 2/3;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
+  grid-row: 2/3;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
 }
 .question-container {
-    grid-row: 1/2;
-    display: grid;
-    align-items: center;
-    justify-items: center;
-  
+  grid-row: 1/2;
+  display: grid;
+  align-items: center;
+  justify-items: center;
 }
 
-#question{
-    font-size: 1.5rem;
+#question {
+  font-size: 1.5rem;
 }
 
-.answer-container{
-    grid-row: 2/3;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    justify-items: center;
-    align-items: center;
-    gap: 2rem;
+.answer-container {
+  grid-row: 2/3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  gap: 2rem;
 }
 
 #main button {
-    grid-column: auto;
-    grid-row: auto;
-    height:fit-content;
-    width:70%;
-    padding:1rem;
-    font-size: 1rem;;
-    font-family: var(--main-font);
-    background-color: var(--primary-color);
-    border: solid rgb(118, 55, 2) 0px;
-    box-shadow: rgb(118, 55, 2) 1px 0px 0px, rgb(118, 55, 2)  2px 2px 0px 0px, rgb(118, 55, 2) 3px 3px 0px 0px, rgb(118, 55, 2) 4px 4px 0px 0px, rgb(118, 55, 2) 5px 5px 0px 0px;
-    box-sizing: border-box;
-    color: #41403e;
-    cursor: pointer;
-    display: inline-block;
-    transition: all 0.2s ease-in-out;
-    user-select: none;
-    touch-action: manipulation;
-
+  grid-column: auto;
+  grid-row: auto;
+  height: fit-content;
+  width: 70%;
+  padding: 1rem;
+  font-size: 1rem;
+  font-family: var(--main-font);
+  background-color: var(--primary-color);
+  border: solid rgb(118, 55, 2) 0px;
+  box-shadow: rgb(118, 55, 2) 1px 0px 0px, rgb(118, 55, 2) 2px 2px 0px 0px,
+    rgb(118, 55, 2) 3px 3px 0px 0px, rgb(118, 55, 2) 4px 4px 0px 0px,
+    rgb(118, 55, 2) 5px 5px 0px 0px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+  touch-action: manipulation;
 }
 
-#main button:hover{
-    box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
-    transform: translate3d(0, 2px, 0);
-    background-color: var(--primary-color-hover);
+#main button:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+  background-color: var(--primary-color-hover);
 }
 
 #main button:focus {
-    box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
 }
 
-
 button.a {
-    justify-self: end;
-    align-self: end;
+  justify-self: end;
+  align-self: end;
 }
 
 button.b {
-    justify-self: start;
-    align-self: end;
+  justify-self: start;
+  align-self: end;
 }
 button.c {
-    justify-self: end;
-    align-self: start;
+  justify-self: end;
+  align-self: start;
 }
 button.d {
-    justify-self: start;
-    align-self: start;
+  justify-self: start;
+  align-self: start;
 }
-

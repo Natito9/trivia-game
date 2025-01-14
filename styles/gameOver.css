@@ -1,4 +1,4 @@
-.popUp-window {
+.gameOver {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -16,15 +16,9 @@
   gap: 2rem;
   align-items: center;
 }
-
-.popUp-text {
-  color: var(--incorrect-color);
-  font-size: 2.3rem;
-  -webkit-text-stroke: 1px rgb(0, 0, 0);
-  letter-spacing: 1px;
-}
-
-.next-question-button {
+.exit-game-button {
+  grid-column: auto;
+  grid-row: auto;
   height: fit-content;
   width: 70%;
   padding: 1rem;
@@ -44,16 +38,8 @@
   touch-action: manipulation;
 }
 
-.next-question-button:hover {
+.exit-game-button:hover {
   box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
   transform: translate3d(0, 2px, 0);
   background-color: var(--primary-color-hover);
-}
-
-@media screen and (max-width: 600px) {
-  /* Styles for mobile screens */
-  .popUp-window {
-    width: 80%;
-    height: 60%;
-  }
 }

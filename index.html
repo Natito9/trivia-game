@@ -1,45 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/reset.css">
-    <link rel="stylesheet" href="styles/homepage.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/navbar.css">
-    <link rel="stylesheet" href="styles/popUp.css">
-    <link rel="stylesheet" href="styles/exitGame.css">
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/homepage.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/navbar.css" />
+    <link rel="stylesheet" href="styles/popUp.css" />
+    <link rel="stylesheet" href="styles/exitGame.css" />
+    <link rel="stylesheet" href="styles/gameOver.css" />
 
     <title>Trivia Game</title>
-</head>
-<body>
+  </head>
+  <body>
     <nav>
-        <button id="quit-game"></button>
-        <h1 id="current-category">Current category</h1>
-        <p id="current-question"></p>
-        
+      <button id="quit-game"></button>
+      <h1 id="current-category">Current category</h1>
+      <p id="current-question"></p>
     </nav>
     <section id="main">
-    <div id="gameOn">
-       <div id="container-question" class="question-container">
-            <p id="question"></p>
+      <div class="homepage-container">
+        <h2 class="title-home">choose a category</h2>
+        <select id="selectMenu">
+          <option value="9" id="categoryGeneral">General Knowledge</option>
+        </select>
+        <button id="playButton" class="play-button">play</button>
+      </div>
+
+      <div id="gameOn">
+        <div id="container-question" class="question-container">
+          <p id="question"></p>
         </div>
         <div id="container-answers" class="answer-container">
-            <button class="btn-answer a">Answer 1</button>
-            <button class="btn-answer b">Answer 2</button>
-            <button class="btn-answer c">Answer 3</button>
-            <button class="btn-answer d">Answer 4</button>
+          <button class="btn-answer a">Answer 1</button>
+          <button class="btn-answer b">Answer 2</button>
+          <button class="btn-answer c">Answer 3</button>
+          <button class="btn-answer d">Answer 4</button>
         </div>
-    </div>
-     
+      </div>
     </section>
-  
+
     <script type="module" src="homepage.js"></script>
-    <script type= "module" src = "feedbackPopup.js"></script>
-    <script type="module" src="exitGame.js"></script>
-    <script type="module" src="score.js"></script>
+    <script type="module" src="feedbackPopup.js"></script>
+    <script type="module" src="gameOver.js"></script>
     <script type="module" src="script.js"></script>
 
-</body>
+    <div class="exit-popup">
+      <button class="continue-button">continue</button>
+      <button class="exit-button2">exit game</button>
+    </div>
+
+    <div class="gameOver">
+      <p id="gameOverText">Game Over</p>
+      <p id="totalScore"></p>
+
+      <button class="exit-game-button">to homepage</button>
+    </div>
+  </body>
 </html>
