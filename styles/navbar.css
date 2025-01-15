@@ -16,7 +16,7 @@ h1{
 }
 
 #quit-game{
-    background-image: url('../sources/images/icon-x-close.png'); 
+    background-image: url('../sources/icon-x-close.png'); 
     background-size: cover;
     background-color: var(--primary-color);
     border:none;
