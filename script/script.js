@@ -21,6 +21,7 @@ const continueButton = document.querySelector(".continue-button");
 const exitButton2 = document.querySelector(".exit-button2");
 const exitWindow = document.querySelector(".exit-popup");
 
+
 async function getDataFromApi(url, retries = 3) {
   try {
     const response = await fetch(url);
@@ -49,6 +50,7 @@ async function getDataFromApi(url, retries = 3) {
   }
 }
 
+
 export function displayQuestions() {
   if (!arrayQuestion[currentQuestionNumber]) return;
 
@@ -64,6 +66,7 @@ export function displayQuestions() {
 
   questionDisplay.innerText = cleanQuestion;
 }
+
 
 export function clearQuestion() {
   questionDisplay.innerText = "";
@@ -146,12 +149,15 @@ export function exitGame() {
   exitWindow.style.display = "none";
   homePage();
 }
-//fix this
-exitButton.addEventListener("click", exitPopUp);
+
+function eventsExitButtons() {
+  exitButton.addEventListener("click", exitPopUp);
 exitButton2.addEventListener("click", exitGame);
 continueButton.addEventListener("click", () => {
   exitWindow.style.display = "none";
 });
+}
+
 
 export async function startQuiz() {
   await getDataFromApi(apiUrl);
@@ -164,6 +170,7 @@ export async function startQuiz() {
     const popUpWindow = createPopUp();
     clickAnyAnswer(answerButtons, popUpWindow);
     displayCurrentCategory();
+    eventsExitButtons() 
   } else {
     console.error("No questions to display.");
   }
@@ -172,6 +179,6 @@ export async function startQuiz() {
 export function resetGame() {
   score = 0;
   currentQuestionNumber = 0;
-  arrayQuestion = [];
-  // startQuiz();
+  arrayQuestion = []; //I clear the array, so I dont have an error efter question 10, but not sure if it helps
+
 }

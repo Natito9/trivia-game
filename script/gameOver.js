@@ -7,9 +7,11 @@ import {
 } from "./script.js";
 import { closePopUp } from "./feedbackPopup.js";
 
+
 const gameOverContainer = document.querySelector(".gameOver");
 const totalScoreDisplay = document.getElementById("totalScore");
 const toHomeButton = document.querySelector(".exit-game-button");
+
 
 function goToHome() {
   toHomeButton.addEventListener("click", () => {
@@ -17,6 +19,7 @@ function goToHome() {
     homePage();
   });
 }
+
 
 function resultsGameOver() {
   closePopUp();
@@ -29,6 +32,7 @@ function resultsGameOver() {
   }`;
   goToHome();
 }
+
 
 export function checkIfGameOver() {
   let something = currentQuestionNumber;
